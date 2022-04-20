@@ -1,30 +1,43 @@
 // 第三方
 import { program } from 'commander';
+import * as inquirer from 'inquirer';
 // 第一方
 import { consoleColors } from './utils/chalk';
+import { questions, Name } from './utils/question';
+import create from './methods/create';
 
-/* mycli create 创建项目 */
+export type Answer = {
+    [key in Name]: string;
+} & { conf: boolean }
+
+
+/* create 创建项目 */
 program
     .command('create')
     .description('create a project ')
     .action(function(){
-        consoleColors.green('👽 👽 👽 '+'欢迎使用mycli,轻松构建react ts项目～🎉🎉🎉')
+        consoleColors.green('创建项目~');
+        inquirer.prompt(questions).then((answer: Answer) => {
+            if (answer.conf) {
+                create(answer);
+            }
+        })
     })
 
-/* mycli start 运行项目 */
+/* start 运行项目 */
 program
 .command('start')
  .description('start a project')
  .action(function(){
-    consoleColors.green('--------运行项目-------')
+    consoleColors.green('运行项目~')
  })
 
-/* mycli build 打包项目 */
+/* build 打包项目 */
 program
 .command('build')
 .description('build a project')
 .action(function(){
-    consoleColors.green('--------构建项目-------')
+    consoleColors.green('构建项目~')
 })
 
 program.parse(process.argv)

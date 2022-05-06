@@ -15,10 +15,13 @@ const create = (res: Answer) => {
     // 我们需要知道用户当前的运行目录，以便将文件夹复制过去
     // const targetPath = process.cwd() + '/target';
     let targetPath = process.cwd();
-    // if (targetPath === templateFilePath) {
-    //     // 本地调试两者是相同的，为了方便起见，重定向targetPath
-    //     targetPath = '/Users/bytedance/Desktop/p'
-    // }
+    consoleColors.red('dev环境' + targetPath);
+    // 方便调试，防止覆盖项目代码
+    if (targetPath === '/Users/bytedance/Documents/demo/mycli03-final-version') {
+        // 为了方便起见，重定向targetPath
+        // todo: 本地调试由于当前运行环境，node_modules安装失败
+        targetPath = '/Users/bytedance/Desktop/p'
+    }
     console.log('template目录和target目录', templateFilePath, targetPath);
 
     handleCopyTemplate(templateFilePath, targetPath).then(() => {

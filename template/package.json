@@ -21,7 +21,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"curr-test": "fl427-cli build",
+		"fl427-start": "fl427-cli start",
+		"fl427-build": "fl427-cli build",
 		"webpack-build": "NODE_ENV=production webpack --config build/webpack.prod.js --mode=production",
 		"webpack-start": "NODE_ENV=development webpack-dev-server --hot --open --config build/webpack.dev.js --mode development",
 		"webpack-config-start": "webpack-dev-server --config webpack.config-mine.js --mode development --open --hot"

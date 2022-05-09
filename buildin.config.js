@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 import mergeConfig from './src/webpack-build/merge';
 
 const config = {
+    mode: 'development',
     // 让Webpack知道以哪个模块为入口，进行依赖收集
     entry: './src/index.tsx',
     // 告诉Webpack打包好的文件放在哪里，以及如何命名
@@ -96,21 +97,21 @@ const config = {
             template: "./public/index.html"
         })
     ],
-    devServer: {
-        host: 'localhost',
-        hot: true,
-        port: 3000,
-        historyApiFallback: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        proxy: {
-            '/api': {
-                target: "http://localhost:4000",
-                changeOrigin: true,
-            }
-        }
-    }
+    // devServer: {
+    //     host: 'localhost',
+    //     hot: true,
+    //     port: 3000,
+    //     historyApiFallback: true,
+    //     headers: {
+    //         'Access-Control-Allow-Origin': '*',
+    //     },
+    //     proxy: {
+    //         '/api': {
+    //             target: "http://localhost:4000",
+    //             changeOrigin: true,
+    //         }
+    //     }
+    // }
 }
 
 export default () => {

@@ -12,7 +12,10 @@ const config = {
         filename: '[name].[contenthash:8].js'
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
+        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"],
+        alias: {
+            '@': path.resolve(process.cwd(), 'src/')
+        }
     },
     optimization: {
         runtimeChunk: true,
@@ -97,6 +100,7 @@ const config = {
             template: "./public/index.html"
         })
     ],
+    devtool: "source-map",
     // devServer: {
     //     host: 'localhost',
     //     hot: true,

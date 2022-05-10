@@ -24,18 +24,10 @@ export const devWebpack = () => {
     console.log('dev-config', config);
     const compiler = webpack(config);
 
-    // const devServerOptions = {
-    //     contentBase: 'dist',
-    //     hot: true,
-    //     historyApiFallback: true,
-    //     compress: true,
-    //     open: true,
-    // };
-
     const devServerOptions = {
         host: 'localhost',
+        open: true,
         hot: true,
-        port: 3000,
         historyApiFallback: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
@@ -49,7 +41,7 @@ export const devWebpack = () => {
     }
 
     const server = new WebpackDevServer(compiler, devServerOptions);
-    server.listen(8000, '127.0.0.1', () => {
-        console.log('Starting server on http://localhost:8000');
+    server.listen(8001, '127.0.0.1', () => {
+        console.log('Starting server on http://localhost:8001');
     });
 }

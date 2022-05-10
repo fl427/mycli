@@ -9,10 +9,7 @@ module.exports = {
         filename: '[name].[contenthash:8].js'
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"],
-        alias: {
-            '@': path.resolve(__dirname, 'src/')
-        }
+        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
     },
     optimization: {
         runtimeChunk: true,
@@ -22,6 +19,16 @@ module.exports = {
     },
     module: {
         // 使用babel编译es678和jsx语法
+        // 这里没有配置preset，在.babelrc文件中配置
+        // rules: [
+        //     {
+        //         test: /\.(js|jsx)$/,
+        //         exclude: /node_modules/,
+        //         use: {
+        //             loader: 'babel-loader'
+        //         }
+        //     }
+        // ],
         rules: [
             {
                 test: /\.(js|jsx|ts|tsx)$/,
@@ -98,7 +105,6 @@ module.exports = {
             template: "./public/index.html"
         })
     ],
-    devtool: "source-map",
     devServer: {
         host: 'localhost',
         hot: true,

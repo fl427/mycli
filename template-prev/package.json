@@ -1,6 +1,6 @@
 {
-	"name": "f",
-	"author": "fl",
+	"name": "1010",
+	"author": "0101",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -65,11 +65,10 @@
 		"less": "^4.1.2",
 		"less-loader": "^10.2.0",
 		"mini-css-extract-plugin": "^2.6.0",
-		"sass": "^1.51.0",
+		"sass": "^1.49.9",
 		"sass-loader": "^12.6.0",
 		"style-loader": "^3.3.1",
-		"tsconfig-paths": "^4.0.0",
-		"webpack": "^5.72.0",
+		"webpack": "^5.70.0",
 		"webpack-cli": "^4.9.2",
 		"webpack-dev-server": "^4.7.4",
 		"webpack-merge": "^5.8.0"

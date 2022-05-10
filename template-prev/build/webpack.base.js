@@ -1,17 +1,17 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     // 让Webpack知道以哪个模块为入口，进行依赖收集
     entry: './src/index.tsx',
     // 告诉Webpack打包好的文件放在哪里，以及如何命名
     output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: '[name].[contenthash:8].js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: '[name].[contenthash:8].js',
+        libraryTarget: 'umd',
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"],
+        extensions: ['.js', '.json', 'jsx', '.ts', '.tsx'],
         alias: {
-            '@': path.resolve(__dirname, 'src/')
+            '@': path.resolve('./src'),
         }
     },
     optimization: {
@@ -21,7 +21,6 @@ module.exports = {
         }
     },
     module: {
-        // 使用babel编译es678和jsx语法
         rules: [
             {
                 test: /\.(js|jsx|ts|tsx)$/,
@@ -91,27 +90,12 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        // 这里我们指定自己的html文件模板，也可以指定生成的html文件名
-        // 如果不传参数，会有一个默认的模板文件
-        new HtmlWebpackPlugin({
-            template: "./public/index.html"
-        })
-    ],
-    devtool: "source-map",
-    devServer: {
-        host: 'localhost',
-        hot: true,
-        port: 3000,
-        historyApiFallback: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        proxy: {
-            '/api': {
-                target: "http://localhost:4000",
-                changeOrigin: true,
-            }
+    externals: process.env.NODE_ENV === 'production'
+        ? {
+            'react': 'react',
+            'react-dom': 'react-dom',
+            'react-router-dom': 'react-router-dom',
+            'react-router': 'react-router',
         }
-    }
+        : {}
 }

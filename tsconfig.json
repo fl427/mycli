@@ -23,6 +23,7 @@
     "lib",
     "node_modules",
     "template",
+    "template-prev",
     "target"
   ]
 }

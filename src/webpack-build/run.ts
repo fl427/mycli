@@ -7,8 +7,8 @@ import getMergedDevConfig from '../webpack/webpack.dev.config';
 import getMergedProdConfig from '../webpack/webpack.prod.config';
 
 // 开发环境构建
-export const devWebpack = () => {
-    const config = getMergedDevConfig();
+export const devWebpack = async () => {
+    const config = await getMergedDevConfig();
 
     console.log('dev的config', config);
     const compiler = webpack(config);
@@ -36,9 +36,9 @@ export const devWebpack = () => {
 }
 
 // 生产环境构建
-export const buildWebpack = () => {
+export const buildWebpack = async () => {
     // Final Config;
-    const config = getMergedProdConfig();
+    const config = await getMergedProdConfig();
 
     console.log('build的config', config);
 

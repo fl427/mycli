@@ -2,26 +2,15 @@
 import * as WebpackDevServer from 'webpack-dev-server/lib/Server';
 import * as webpack from 'webpack';
 // import mergeConfig from "./merge";
+// import getMergedConfig from '../../buildin.config';
+import getMergedDevConfig from '../webpack/webpack.dev.config';
+import getMergedProdConfig from '../webpack/webpack.prod.config';
 
-import getMergedConfig from '../../buildin.config';
-
-export const buildWebpack = () => {
-    // Final Config;
-    const config = getMergedConfig();
-
-    console.log('final-config', config);
-
-    const compiler = webpack(config);
-    console.log('final-compiler', compiler);
-    compiler.run((err, stat) => {
-        console.log('curr-stat', stat, err);
-    })
-}
-
+// 开发环境构建
 export const devWebpack = () => {
-    const config = getMergedConfig();
+    const config = getMergedDevConfig();
 
-    console.log('dev-config', config);
+    console.log('dev的config', config);
     const compiler = webpack(config);
 
     const devServerOptions = {
@@ -44,4 +33,17 @@ export const devWebpack = () => {
     server.listen(8001, '127.0.0.1', () => {
         console.log('Starting server on http://localhost:8001');
     });
+}
+
+// 生产环境构建
+export const buildWebpack = () => {
+    // Final Config;
+    const config = getMergedProdConfig();
+
+    console.log('build的config', config);
+
+    const compiler = webpack(config);
+    compiler.run((err, stat) => {
+        console.log('构建时', err);
+    })
 }

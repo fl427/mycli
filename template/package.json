@@ -17,8 +17,10 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "webpack-dev-server --config webpack.config-mine.js --mode development --open --hot",
-		"build": "react-scripts build",
+		"start": "fl427-cli start",
+		"build": "fl427-cli build",
+		"start-prev": "webpack-dev-server --config webpack.config-mine.js --mode development --open --hot",
+		"build-prev": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"fl427-start": "fl427-cli start",

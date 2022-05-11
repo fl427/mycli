@@ -34,12 +34,7 @@ program
  .action(function(){
     consoleColors.green('运行项目~');
     start('start').then(() => {
-
         devWebpack();
-        // 这样做是可以的，我们能够在用户的文件夹下读取到配置信息 template package.json中的curr-test是关键，让用户用脚手架cli的命令，就能融合webpack配置
-        // fs.readFile('./fl427.config.js', (err, data) => {
-        //     console.log('start+++-fl427.config.js', data);
-        // })
     });
  })
 

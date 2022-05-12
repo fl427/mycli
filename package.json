@@ -19,6 +19,7 @@
     "commander": "^9.2.0",
     "html-webpack-plugin": "^5.5.0",
     "inquirer": "^8.2.2",
+    "mini-css-extract-plugin": "^2.6.0",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0",

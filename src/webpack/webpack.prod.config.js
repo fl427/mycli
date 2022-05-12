@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import mergeConfig from '../webpack-build/merge';
 
 const config = {
@@ -20,7 +21,13 @@ const config = {
     optimization: {
         runtimeChunk: true,
         splitChunks: {
-            chunks: "all"
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                }
+            }
         }
     },
     module: {
@@ -98,9 +105,14 @@ const config = {
         // 如果不传参数，会有一个默认的模板文件
         new HtmlWebpackPlugin({
             template: "./public/index.html"
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[id].[contenthash].css',
+            ignoreOrder: true,
         })
     ],
-    devtool: "source-map",
+    devtool: "hidden-source-map",
 }
 
 export default () => {

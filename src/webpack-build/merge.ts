@@ -3,7 +3,6 @@ import {merge} from 'webpack-merge';
 
 // 返回最终打包的webpack配置
 const mergeConfig = async (config, userConfig) => {
-    console.log('sssss', userConfig);
     if (!userConfig) {
         return config;
     }

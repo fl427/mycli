@@ -23,7 +23,9 @@ const getUserDevServerConfig = async (type: cliCommandType) => {
 
 // 开发环境构建
 export const devWebpack = async (type: cliCommandType) => {
+    // 获取用户配置，传递给getMergedDevConfig函数进行融合
     const userConfig = await getUserDevServerConfig(type);
+    // 提取出用户配置中的devServer字段
     const { devServer: userDevServerConfig } = userConfig;
     const config = await getMergedDevConfig(userConfig);
 

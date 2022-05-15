@@ -15,6 +15,7 @@ export const devWebpack = async () => {
 
     const devServerOptions = {
         host: 'localhost',
+        port: 8001,
         open: true,
         hot: true,
         historyApiFallback: true,
@@ -26,13 +27,19 @@ export const devWebpack = async () => {
                 target: "http://localhost:4000",
                 changeOrigin: true,
             }
+        },
+        devMiddleware: {
+            // 简化Server输出，我们只希望看到error信息
+            stats: 'errors-only',
         }
     }
 
-    const server = new WebpackDevServer(compiler, devServerOptions);
-    server.listen(8001, '127.0.0.1', () => {
-        console.log('Starting server on http://localhost:8001');
-    });
+    const server = new WebpackDevServer(devServerOptions, compiler);
+    const runServer = async () => {
+        console.log('Starting server...');
+        await server.start();
+    };
+    runServer().then();
 }
 
 // 生产环境构建

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ProgressPlugin } = require('webpack');
 import mergeConfig from '../webpack-build/merge';
 
 const config = {
@@ -98,7 +99,9 @@ const config = {
         // 如果不传参数，会有一个默认的模板文件
         new HtmlWebpackPlugin({
             template: "./public/index.html"
-        })
+        }),
+        // 添加构建信息输出，监控各个 hook 执行的进度 percentage，输出各个 hook 的名称和描述
+        new ProgressPlugin(),
     ],
     devtool: "source-map",
 }

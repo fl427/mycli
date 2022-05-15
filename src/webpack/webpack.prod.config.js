@@ -18,18 +18,6 @@ const config = {
             '@': path.resolve(process.cwd(), 'src/')
         }
     },
-    optimization: {
-        runtimeChunk: true,
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all',
-                }
-            }
-        }
-    },
     module: {
         rules: [
             {
@@ -113,6 +101,26 @@ const config = {
         })
     ],
     devtool: "hidden-source-map",
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                }
+            }
+        }
+    },
+    cache: {
+        type: 'filesystem',
+        cacheDirectory: process.cwd() + './temp_cache',
+        buildDependencies: {
+            config: [__filename]
+        },
+        allowCollectingMemory: true,
+        profile: true,
+    },
 }
 
 export default () => {

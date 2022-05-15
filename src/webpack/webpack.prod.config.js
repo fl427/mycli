@@ -123,6 +123,6 @@ const config = {
     },
 }
 
-export default () => {
-    return mergeConfig(config);
+export default (userConfig) => {
+    return mergeConfig(config, userConfig);
 }

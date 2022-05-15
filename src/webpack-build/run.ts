@@ -1,19 +1,37 @@
 // 执行webpack的dev与build
 import * as WebpackDevServer from 'webpack-dev-server/lib/Server';
 import * as webpack from 'webpack';
+import * as fs from "fs";
 // import mergeConfig from "./merge";
 // import getMergedConfig from '../../buildin.config';
 import getMergedDevConfig from '../webpack/webpack.dev.config';
 import getMergedProdConfig from '../webpack/webpack.prod.config';
+import {cliCommandType} from "index";
+
+// 取得用户自定义的devServer内容
+const getUserDevServerConfig = async (type: cliCommandType) => {
+    const targetPath = process.cwd() + (type === 'start' ? '/build/webpack.dev.js' : '/build/webpack.prod.js');
+    const isExist = fs.existsSync(targetPath);
+    if (isExist) {
+        // 用户的配置
+        const userConfig = await import(targetPath) || {};
+        console.log('取得用户自定义的devServer配置', userConfig);
+        return userConfig;
+    }
+    return null;
+}
 
 // 开发环境构建
-export const devWebpack = async () => {
-    const config = await getMergedDevConfig();
+export const devWebpack = async (type: cliCommandType) => {
+    const userConfig = await getUserDevServerConfig(type);
+    const { devServer: userDevServerConfig } = userConfig;
+    const config = await getMergedDevConfig(userConfig);
 
     console.log('dev的config', config);
+
     const compiler = webpack(config);
 
-    const devServerOptions = {
+    const defaultDevServerConfig = {
         host: 'localhost',
         port: 8001,
         open: true,
@@ -34,6 +52,9 @@ export const devWebpack = async () => {
         }
     }
 
+    // 用户自定义了devServer就使用用户自己的内容，否则使用默认配置
+    const devServerOptions = userDevServerConfig ? userDevServerConfig : defaultDevServerConfig;
+
     const server = new WebpackDevServer(devServerOptions, compiler);
     const runServer = async () => {
         console.log('Starting server...');
@@ -43,9 +64,10 @@ export const devWebpack = async () => {
 }
 
 // 生产环境构建
-export const buildWebpack = async () => {
+export const buildWebpack = async (type: cliCommandType) => {
+    const userConfig = await getUserDevServerConfig(type);
     // Final Config;
-    const config = await getMergedProdConfig();
+    const config = await getMergedProdConfig(userConfig);
 
     console.log('build的config', config);
 

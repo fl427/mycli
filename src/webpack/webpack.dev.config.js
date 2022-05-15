@@ -106,6 +106,6 @@ const config = {
     devtool: "source-map",
 }
 
-export default async () => {
-    return await mergeConfig(config);
+export default async (userConfig) => {
+    return await mergeConfig(config, userConfig);
 }

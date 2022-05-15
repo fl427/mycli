@@ -13,6 +13,7 @@ export type Answer = {
     [key in Name]: string;
 } & { conf: boolean }
 
+export type cliCommandType = 'start' | 'build';
 
 /* create 创建项目 */
 program
@@ -34,7 +35,7 @@ program
  .action(function(){
     consoleColors.green('运行项目~');
     start('start').then(() => {
-        devWebpack();
+        devWebpack('start');
     });
  })
 
@@ -46,7 +47,7 @@ program
     consoleColors.green('构建项目~');
     start('build').then(() => {
         consoleColors.green('+++构建完成+++')
-        buildWebpack();
+        buildWebpack('build');
     })
 })
 
